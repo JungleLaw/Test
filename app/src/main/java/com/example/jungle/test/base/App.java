@@ -14,9 +14,13 @@ import imageloader.ImageLoaderUtil;
  */
 
 public class App extends Application {
+
+    public static Application instance;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         AutoLayoutConifg.getInstance().useDeviceSize();
         ImageLoader.init(this, 10, new GlideImageLoaderImpl());
     }
@@ -31,5 +35,9 @@ public class App extends Application {
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         ImageLoader.trimMemory(level);
+    }
+
+    public static Application getInstance() {
+        return instance;
     }
 }
