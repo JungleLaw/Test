@@ -25,14 +25,7 @@ public class DrawableBuilder extends Builder {
         return this;
     }
 
-    public DrawableBuilder loading(@DrawableRes int loadingResId) {
-        params.loadingResId = loadingResId;
-        return this;
-    }
-
-
-
-    public DrawableBuilder preload(int width, int height) {
+    public DrawableBuilder override(int width, int height) {
         params.width = width;
         params.height = height;
         return this;

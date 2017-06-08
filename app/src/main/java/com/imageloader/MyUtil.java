@@ -5,9 +5,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.imageloader.config.GlobalConfig;
 import com.imageloader.config.Params;

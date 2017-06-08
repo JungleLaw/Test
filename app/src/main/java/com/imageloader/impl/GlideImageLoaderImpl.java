@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -39,9 +40,11 @@ public class GlideImageLoaderImpl implements ILoader {
         if (config.getParams().getBitmapListener() != null) {
             RequestManager requestManager = Glide.with(config.getParams().context);
             DrawableTypeRequest request = getDrawableTypeRequest(config, requestManager);
-            request.override(config.getParams().getWidth(), config.getParams().getHeight());
+            if (config.getParams().getWidth() > 0 && config.getParams().getHeight() > 0) {
+                request.override(config.getParams().getWidth(), config.getParams().getHeight());
+            }
 
-            SimpleTarget target = new SimpleTarget<Bitmap>(config.getParams().getWidth(), config.getParams().getHeight()) {
+            SimpleTarget target = new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
                     // do something with the bitmap
@@ -59,13 +62,7 @@ public class GlideImageLoaderImpl implements ILoader {
                 }
             };
             // setShapeModeAndBlur(config, request);
-            if (config.getParams().asBitmap) {
-                request.asBitmap().into(target);
-            } else if (config.getParams().asGif) {
-                request.asGif().into(target);
-            } else {
-                request.into(target);
-            }
+            request.asBitmap().into(target);
 
         } else {
             RequestManager requestManager = Glide.with(config.getParams().context);
@@ -90,13 +87,16 @@ public class GlideImageLoaderImpl implements ILoader {
                     request.centerCrop();
                     break;
                 default:
-                    request.centerCrop();
                     break;
             }
-            request.override(config.getParams().getWidth(), config.getParams().getHeight());
+
+            if (config.getParams().getWidth() > 0 && config.getParams().getHeight() > 0) {
+                request.override(config.getParams().getWidth(), config.getParams().getHeight());
+            }
 
             if (config.getParams().getPlaceHolderResId() > 0) {
                 request.placeholder(config.getParams().getPlaceHolderResId());
+            } else {
             }
 
             if (config.getParams().getThumbnail() > 0) {
@@ -107,13 +107,15 @@ public class GlideImageLoaderImpl implements ILoader {
                 request.error(config.getParams().getErrorResId());
             }
 
-            if (config.getParams().asBitmap) {
-                request.asBitmap();
-            } else if (config.getParams().asGif) {
-                request.asGif();
-            }
-
             if (config.getParams().getTarget() instanceof ImageView) {
+                if (config.getParams().asBitmap) {
+                    request.asBitmap().into((ImageView) config.getParams().getTarget());
+                    return;
+                } else if (config.getParams().asGif) {
+                    request.asGif().into((ImageView) config.getParams().getTarget());
+                    Log.i("TAG", "asGif");
+                    return;
+                }
                 request.into((ImageView) config.getParams().getTarget());
             }
         }

@@ -23,6 +23,9 @@
         <activity
             android:name="imageloader.MainActivity"
             android:hardwareAccelerated="true">
+
+        </activity>
+        <activity android:name=".ImgActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -14,11 +14,13 @@ public class GifTypeBuilder extends DrawableBuilder {
 
     public DrawableBuilder asBitmap() {
         params.asBitmap = true;
+        params.asGif = false;
         return this;
     }
 
     public DrawableBuilder asGif() {
-        params.asBitmap = true;
+        params.asGif = true;
+        params.asBitmap = false;
         return this;
     }
 }

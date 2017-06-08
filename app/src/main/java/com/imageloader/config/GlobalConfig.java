@@ -9,12 +9,17 @@ import android.view.WindowManager;
 import com.imageloader.i.ILoader;
 
 /**
+ * 图片加载全局配置
  * Created by Jungle on 2017/6/6.
  */
-
 public class GlobalConfig {
-
+    /**
+     * 上下文
+     */
     public static Context mContext;
+    /**
+     * App主线程Handler
+     */
     public static Handler mMainHanlder;
 
     public static Handler getMainHandler() {
@@ -28,9 +33,18 @@ public class GlobalConfig {
         return mMainHanlder;
     }
 
+    /**
+     * 屏幕显示区域高度
+     */
     private static int mDisplayHeight;
+    /**
+     * 屏幕显示区域宽度
+     */
     private static int mDisplayWidth;
 
+    /**
+     * 获取屏幕显示区域高度
+     */
     public static int getDisplayHeight() {
         if (mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             return mDisplayHeight < mDisplayWidth ? mDisplayHeight : mDisplayWidth;
@@ -40,6 +54,9 @@ public class GlobalConfig {
         return mDisplayHeight;
     }
 
+    /**
+     * 获取屏幕显示区域宽度
+     */
     public static int getDisplayWidth() {
         if (mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             return mDisplayHeight > mDisplayWidth ? mDisplayHeight : mDisplayWidth;
@@ -49,6 +66,12 @@ public class GlobalConfig {
         return mDisplayWidth;
     }
 
+    /**
+     * 初始化，在APPLICATION的ONCREATE方法调用
+     * @param context
+     * @param cacheSizeInM
+     * @param imageLoader
+     */
     public static void init(Context context, int cacheSizeInM, ILoader imageLoader) {
         GlobalConfig.mContext = context;
         GlobalConfig.cacheSize = cacheSizeInM;
@@ -82,8 +105,15 @@ public class GlobalConfig {
      */
     public static boolean ignoreCertificateVerify = false;
 
+    /**
+     * 加载图片接口实现
+     */
     private static ILoader loader;
 
+    /**
+     * 获取加载图片接口实现
+     * @return
+     */
     public static ILoader getLoader() {
         return loader;
     }

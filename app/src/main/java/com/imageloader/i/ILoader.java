@@ -9,9 +9,9 @@ import com.imageloader.config.SingleConfig;
 import java.io.File;
 
 /**
+ * 图片加载及其他功能接口
  * Created by Jungle on 2017/6/6.
  */
-
 public interface ILoader {
     void init(Context context, int cacheSizeInM);
 
