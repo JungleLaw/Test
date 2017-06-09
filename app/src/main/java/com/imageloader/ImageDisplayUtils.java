@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.widget.ImageView;
 
+import com.imageloader.config.Params;
 import com.model.MgeImage;
 
 import java.io.File;
@@ -41,12 +42,15 @@ public class ImageDisplayUtils {
     public static void displayWithPlaceholder(Context context, String url, ImageView target, int placeholderResId) {
         display(context, url, target, placeholderResId, -1, 0, 0, 0);
     }
+
     public static void displayWithPlaceholder(Context context, File file, ImageView target, int placeholderResId) {
         display(context, file, target, placeholderResId, -1, 0, 0, 0);
     }
+
     public static void displayWithPlaceholder(Context context, Uri uri, ImageView target, int placeholderResId) {
         display(context, uri, target, placeholderResId, -1, 0, 0, 0);
     }
+
     public static void displayWithPlaceholder(Context context, int resId, ImageView target, int placeholderResId) {
         display(context, resId, target, placeholderResId, -1, 0, 0, 0);
     }
@@ -151,7 +155,7 @@ public class ImageDisplayUtils {
         }
     }
 
-    private static void display(Context context, MgeImage mgeImage, ImageView target, int placeholderResId, int errorResId, int mode, int width, int height) {
+    public static void display(Context context, MgeImage mgeImage, ImageView target, int placeholderResId, int errorResId, int mode, int width, int height) {
         switch (mode) {
             case MODE.MODE_BITMAP:
                 ImageLoader.with(context).load(mgeImage.getCurrentBestUrl(context)).asBitmap().placeHolder(placeholderResId).error(errorResId).override(width, height).into(target);
@@ -164,4 +168,37 @@ public class ImageDisplayUtils {
                 break;
         }
     }
+
+    public static void displayTask(Context context, String url, Params.BitmapListener listener) {
+        ImageLoader.with(context).load(url).asBitmap().setBitmapListener(listener);
+    }
+
+    public static void displayTask(Context context, File file, Params.BitmapListener listener) {
+        ImageLoader.with(context).load(file).asBitmap().setBitmapListener(listener);
+    }
+
+    public static void displayTask(Context context, Uri uri, Params.BitmapListener listener) {
+        ImageLoader.with(context).load(uri).asBitmap().setBitmapListener(listener);
+    }
+
+    public static void displayTask(Context context, int resId, Params.BitmapListener listener) {
+        ImageLoader.with(context).load(resId).asBitmap().setBitmapListener(listener);
+    }
+
+    public static void displayTask(Context context, String url, Params.BitmapListener listener, int placeholderResId, int errorResId) {
+        ImageLoader.with(context).load(url).asBitmap().placeHolder(placeholderResId).error(errorResId).setBitmapListener(listener);
+    }
+
+    public static void displayTask(Context context, File file, Params.BitmapListener listener, int placeholderResId, int errorResId) {
+        ImageLoader.with(context).load(file).asBitmap().placeHolder(placeholderResId).error(errorResId).setBitmapListener(listener);
+    }
+
+    public static void displayTask(Context context, Uri uri, Params.BitmapListener listener, int placeholderResId, int errorResId) {
+        ImageLoader.with(context).load(uri).asBitmap().placeHolder(placeholderResId).error(errorResId).setBitmapListener(listener);
+    }
+
+    public static void displayTask(Context context, int resId, Params.BitmapListener listener, int placeholderResId, int errorResId) {
+        ImageLoader.with(context).load(resId).asBitmap().placeHolder(placeholderResId).error(errorResId).setBitmapListener(listener);
+    }
+
 }
