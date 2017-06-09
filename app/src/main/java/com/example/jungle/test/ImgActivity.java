@@ -15,7 +15,6 @@ import me.imid.swipebacklayout.lib.app.SwipeBackAutoLayotActivity;
 /**
  * Created by Jungle on 2017/6/7.
  */
-
 public class ImgActivity extends SwipeBackAutoLayotActivity {
 
     private static final String IMG_URL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496812211400&di=a82365ea201d93d00bdac168f5fc1619&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2%2F568b21088b65c.jpg";
@@ -48,22 +47,22 @@ public class ImgActivity extends SwipeBackAutoLayotActivity {
 //                .into(imageView);
         ImageDisplayUtils.display(this, IMG_URL, imageView);
 
-//        ImageLoader.with(this).load(IMG_URL2)
-//                .fitCenter()
-//                .placeHolder(R.drawable.bg_default_video_common_small)
-//                .error(R.drawable.avata_default)
-//                .setBitmapListener(new Params.BitmapListener() {
-//                    @Override
-//                    public void onSuccess(Bitmap bitmap) {
-//                        imageView2.setImageBitmap(bitmap);
-//                    }
-//
-//                    @Override
-//                    public void onFail() {
-//                        Toast.makeText(ImgActivity.this, "failed", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-        ImageDisplayUtils.displayWithMode(this, IMG_URL2, imageView2, ImageDisplayUtils.MODE.MODE_BITMAP);
+        ImageLoader.with(this).load(IMG_URL2)
+                .fitCenter()
+                .placeHolder(R.drawable.bg_default_video_common_small)
+                .error(R.drawable.avata_default)
+                .setBitmapListener(new Params.BitmapListener() {
+                    @Override
+                    public void onSuccess(Bitmap bitmap) {
+                        imageView2.setImageBitmap(bitmap);
+                    }
+
+                    @Override
+                    public void onFail() {
+                        Toast.makeText(ImgActivity.this, "failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+//        ImageDisplayUtils.displayWithMode(this, IMG_URL2, imageView2, ImageDisplayUtils.MODE.MODE_BITMAP);
 
 //        ImageLoader.with(this)
 //                .load(IMG_URL)
@@ -73,9 +72,9 @@ public class ImgActivity extends SwipeBackAutoLayotActivity {
 
         Glide.with(this)
                 .load(IMG_URL2)
-                .centerCrop()
-                .placeholder(R.drawable.bg_default_video_common_small)
-                .error(R.drawable.avata_default)
+//                .centerCrop()
+//                .placeholder(R.drawable.bg_default_video_common_small)
+//                .error(R.drawable.avata_default)
                 .into(imageView3);
 
 
@@ -106,10 +105,11 @@ public class ImgActivity extends SwipeBackAutoLayotActivity {
                 , ImageDisplayUtils.MODE.MODE_BITMAP);
 
         Glide.with(this)
+                .asBitmap()
                 .load(GIF_URL)
-                .asGif()
-                .placeholder(R.drawable.bg_default_video_common_small)
-                .error(R.drawable.avata_default)
+//                .asGif()
+//                .placeholder(R.drawable.bg_default_video_common_small)
+//                .error(R.drawable.avata_default)
                 .into(gifView3);
     }
 }
