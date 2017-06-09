@@ -29,7 +29,7 @@ public interface ILoader {
 
     void clearCacheByUrl(String url);
 
-    void clearMomoryCache(View view);
+    void clearMomoryCache(SingleConfig config, View view);
 
     void clearMomoryCache(String url);
 
